@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMC GN</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(to right, rgb(29, 136, 207), rgb(110, 25, 143));
+            text-align: center;
+            color: #fff;
+        }
+        .container{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 1em;
+            border-radius: 10px;
+        }
+        button{
+            background-color: slateblue;
+            color: #fff;
+            border: none;
+            padding: 1em;
+            border-radius: 10px;
+            box-shadow: 1px 1px 6px black;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: steelblue;
+        }
+        .first-step,
+        .second-step{
+            display: none;
+        }
+        input{
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gustavo Neitzke</h1>
+    <div class="container">
+        <div class="first-step">
+            <p>Clique no botão para calcular o seu IMC</p>
+            <button>Iniciar</button>
+        </div>
+        <div class="second-step">
+            <h3>Calculadora IMC</h3>
+            <hr>
+            <label for="peso">Digite seu peso:</label>
+            <input type="number" placeholder="Seu peso" id="peso">
+            <br><br>
+            <label for="altura">Digite a sua altura:</label>
+            <input type="number" placeholder="Seu altura" id="altura">
+            <br><br>
+            <button>Calcular</button>
+        </div>
+        <div class="final-step">
+            <h3>Resultado!</h3>
+            <p id="resultado">...</p>
+            <button>Calcular Novamente</button>
+            <button>Finalizar</button>
+        </div>
+    </div>
+</body>
+</html>
