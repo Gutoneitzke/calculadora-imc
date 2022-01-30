@@ -34,7 +34,7 @@
         button:hover{
             background-color: steelblue;
         }
-        .first-step,
+        .final-step,
         .second-step{
             display: none;
         }
@@ -44,6 +44,9 @@
             border: none;
             outline: none;
         }
+        #resultado{
+            font-size: 25px;
+        }
     </style>
 </head>
 <body>
@@ -51,7 +54,7 @@
     <div class="container">
         <div class="first-step">
             <p>Clique no botão para calcular o seu IMC</p>
-            <button>Iniciar</button>
+            <button onclick="go(1,2)">Iniciar</button>
         </div>
         <div class="second-step">
             <h3>Calculadora IMC</h3>
@@ -62,14 +65,112 @@
             <label for="altura">Digite a sua altura:</label>
             <input type="number" placeholder="Seu altura" id="altura">
             <br><br>
-            <button>Calcular</button>
+            <button onclick="validate()">Calcular</button>
         </div>
         <div class="final-step">
             <h3>Resultado!</h3>
-            <p id="resultado">...</p>
-            <button>Calcular Novamente</button>
-            <button>Finalizar</button>
+            <p id="resultado"></p>
+            <button onclick="go(3,2)">Calcular Novamente</button>
+            <button onclick="go(3,1)">Finalizar</button>
         </div>
     </div>
 </body>
+<script>
+    const firstDiv = document.querySelector('.first-step');
+    const secondDiv = document.querySelector('.second-step');
+    const finalDiv = document.querySelector('.final-step');
+
+    function go(currentStep,nextStep)
+    {
+        let dNone, dBlock;
+        if(currentStep == 1)
+        {
+            dNone = firstDiv;
+        }
+        else if(currentStep == 2)
+        {
+            dNone = secondDiv;
+        }
+        else
+        {
+            dNone = finalDiv;
+        }
+        
+        dNone.style.display = 'none';
+
+        if(nextStep == 1)
+        {
+            dBlock = firstDiv;
+        }
+        else if(nextStep == 2)
+        {
+            dBlock = secondDiv;
+        }
+        else
+        {
+            dBlock = finalDiv;
+        }
+        dBlock.style.display = 'block';
+    }
+
+    function validate()
+    {
+        const peso   = document.getElementById('peso');
+        const altura = document.getElementById('altura');
+        peso.style.border   = 'none';
+        altura.style.border = 'none';
+        if(!peso.value || !altura.value)
+        {
+            if(!peso.value && !altura.value)
+            {
+                peso.style.border = '1px solid red';
+                altura.style.border = '1px solid red';
+            }
+            else if(!peso.value)
+            {
+                peso.style.border = '1px solid red';
+            }
+            else
+            {
+                altura.style.border = '1px solid red';
+            }
+        }
+        else
+        {
+            let imc = peso.value / (altura.value * altura.value);
+            const result = document.getElementById('resultado');
+            if(imc < 18.5)
+            {
+                console.log('Magreza | Obesidade: 0');
+                result.style.color = 'yellow';
+                result.innerHTML = 'Magreza | Obesidade: 0';
+            }
+            else if(imc >= 18.5 && imc < 25)
+            {
+                console.log('Normal | Obesidade: 0');
+                result.style.color = 'green';
+                result.innerHTML = 'Normal | Obesidade: 0';
+            }
+            else if(imc >= 25 && imc < 30)
+            {
+                console.log('Sobrepeso | Obesidade: I');
+                result.style.color = 'yellow';
+                result.innerHTML = 'Sobrepeso | Obesidade: I';
+            }
+            else if(imc >= 30 && imc < 40)
+            {
+                console.log('Obesidade | Obesidade: II');
+                result.style.color = 'red';
+                result.innerHTML = 'Obesidade | Obesidade: II';
+            }
+            else
+            {
+                console.log('Obesidade grave | Obesidade: III');
+                result.style.color = 'black';
+                result.innerHTML = 'Obesidade grave | Obesidade: III';
+            }
+            go(2,3);
+        }
+    }
+</script>
 </html>
